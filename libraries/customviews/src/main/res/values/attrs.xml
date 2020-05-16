@@ -5,6 +5,15 @@
         <attr name="android:background" />
     </declare-styleable>
 
+    <declare-styleable name="LoadingButton">
+        <attr name="android:text" />
+        <attr name="android:textColor" />
+        <attr name="android:background" />
+        <attr name="enableButton" format="boolean" />
+        <attr name="colorProgressBar" format="color" />
+        <attr name="showLoading" format="boolean" />
+    </declare-styleable>
+
     <!--    PROGRESS BAR ////////////////////////////////////////////////////////////////////////-->
     <declare-styleable name="DotsProgressBar">
         <attr name="dotColors" format="color" />

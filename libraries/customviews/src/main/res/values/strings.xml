@@ -4,4 +4,6 @@
     <string name="acs_close">fechar</string>
 
     <string name="acs_toolbar_tittle">%1$s</string>
+
+    <string name="loading">carregando</string>
 </resources>
