@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
 import androidx.fragment.app.FragmentTransaction
+import rafaelmfer.customviews.R
 
 @SuppressLint("CommitTransaction")
 fun FragmentManager.ensureTransaction() = beginTransaction()
@@ -19,13 +20,13 @@ fun <T> FragmentManager.getFragment(id: T) = when (id) {
     else -> null
 }
 
-//fun FragmentManager.attachFragmentWithAnimation(container: Int, frag: Fragment, stackAdd: Boolean) {
-//    ensureTransaction().run {
-//        setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out)
-//        if (stackAdd) addToBackStack(frag.tag)
-//        attachFragment(container, frag)
-//    }
-//}
+fun FragmentManager.attachFragmentWithAnimation(container: Int, frag: Fragment, stackAdd: Boolean) {
+    ensureTransaction().run {
+        setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out)
+        if (stackAdd) addToBackStack(frag.tag)
+        attachFragment(container, frag)
+    }
+}
 
 fun FragmentManager.attachFragment(container: Int, frag: Fragment, stackAdd: Boolean) = ensureTransaction().run {
     if (stackAdd) addToBackStack(frag.tag)
