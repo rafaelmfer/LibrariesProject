@@ -50,7 +50,6 @@ import androidx.core.view.AccessibilityDelegateCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat
 import androidx.recyclerview.widget.RecyclerView
-import org.jetbrains.anko.runOnUiThread
 import rafaelmfer.customviews.R
 import java.io.File
 import java.util.*
@@ -396,12 +395,6 @@ fun View.changeVisibility(visible: Boolean) {
 
 fun View.changeToInvisible(invisible: Boolean) {
     this.visibility = if (invisible) View.INVISIBLE else View.VISIBLE
-}
-
-fun View.changeVisibilityOnUiThread(visible: Boolean) {
-    this.context.runOnUiThread {
-        visibility = if (visible) View.VISIBLE else View.VISIBLE
-    }
 }
 
 fun <T : View> T.onGlobalLayoutListener(onGlobalLayout: T.() -> Unit) = viewTreeObserver.let {
