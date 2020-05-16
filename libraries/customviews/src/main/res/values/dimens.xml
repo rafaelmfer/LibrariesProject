@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--    MARGIN-->
+    <dimen name="margin_4">4dp</dimen>
+    <dimen name="margin_8">8dp</dimen>
+    <dimen name="margin_52">52dp</dimen>
+
+    <!--    PADDING-->
+    <dimen name="padding_4">4dp</dimen>
+
+    <!--    WIDTH-->
+    <dimen name="width_48">48dp</dimen>
+
+    <!--    HEIGHT-->
+    <dimen name="height_48">48dp</dimen>
+
+    <!--    FONT SIZE-->
+    <dimen name="font_18">18sp</dimen>
+</resources>

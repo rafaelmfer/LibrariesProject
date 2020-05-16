@@ -5,6 +5,14 @@
         <attr name="android:background" />
     </declare-styleable>
 
+    <!--    TOOLBARS ////////////////////////////////////////////////////////////////////////////-->
+    <declare-styleable name="BasicToolbar">
+        <attr name="toolbarTitle" format="string" />
+        <attr name="showTitle" format="boolean" />
+        <attr name="showCloseButton" format="boolean" />
+        <attr name="showBackButton" format="boolean" />
+    </declare-styleable>
+
     <!--    TEXT FIELDS /////////////////////////////////////////////////////////////////////////-->
     <declare-styleable name="TextViewMaterialIcon">
         <attr name="android:background" />
