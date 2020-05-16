@@ -5,6 +5,13 @@
         <attr name="android:background" />
     </declare-styleable>
 
+    <!--    PROGRESS BAR ////////////////////////////////////////////////////////////////////////-->
+    <declare-styleable name="DotsProgressBar">
+        <attr name="dotColors" format="color" />
+        <attr name="dotsCount" format="integer" />
+        <attr name="timeoutOfDots" format="integer" />
+    </declare-styleable>
+
     <!--    TOOLBARS ////////////////////////////////////////////////////////////////////////////-->
     <declare-styleable name="BasicToolbar">
         <attr name="toolbarTitle" format="string" />
@@ -18,7 +25,7 @@
         <attr name="android:background" />
     </declare-styleable>
 
-<!--    IMAGE VIEWS /////////////////////////////////////////////////////////////////////////////-->
+    <!--    IMAGE VIEWS /////////////////////////////////////////////////////////////////////////////-->
     <declare-styleable name="CircleImageView">
         <attr name="strokeColor" format="color" />
         <attr name="strokeWidth" format="dimension" />
