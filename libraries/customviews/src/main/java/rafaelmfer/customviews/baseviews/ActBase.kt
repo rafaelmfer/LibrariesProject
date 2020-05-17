@@ -4,9 +4,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
+import rafaelmfer.customviews.R
 
 open class ActBase(
-    val layout: Any? = null,
+    val layout: Any? = R.layout.act_frame,
     val exceptionHandler: Class<out Thread.UncaughtExceptionHandler>? = null
 ) : AppCompatActivity() {
 

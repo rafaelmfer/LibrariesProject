@@ -28,4 +28,9 @@ abstract class FragBase(private val layout: Int? = null) : Fragment() {
     open fun ViewModel.onViewModel() {}
 
     open fun View.onView() {}
+
+    companion object {
+        inline fun <reified T : FragBase> new(bundle: Bundle?): T =
+            T::class.java.newInstance().apply { arguments = bundle }
+    }
 }
