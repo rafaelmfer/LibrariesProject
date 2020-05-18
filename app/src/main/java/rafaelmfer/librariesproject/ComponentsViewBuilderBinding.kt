@@ -14,7 +14,7 @@ class ComponentsViewBuilderBinding : RecyclerViewBuilderViewBinding<KClass<out A
 
     override fun ItemHostBinding.onBind(position: Int) {
         collection.get(position).run {
-            componentButton.text = qualifiedName
+            componentButton.text = simpleName
             componentButton.onClickStart(this)
         }
     }

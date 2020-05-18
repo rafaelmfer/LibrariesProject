@@ -7,10 +7,11 @@ import rafaelmfer.customviews.extensions.recyclerview.setupViewBinding
 import rafaelmfer.librariesproject.databinding.FragHostBinding
 import kotlin.reflect.KClass
 
-
 class FragHost : FragBind<FragHostBinding>(FragHostBinding::class.java) {
 
-    private val actList = listOf<KClass<out AppCompatActivity>>()
+    private val actList = listOf<KClass<out AppCompatActivity>>(
+        ActLoadingButton::class
+    )
 
     override fun FragHostBinding.onBoundView() {
 

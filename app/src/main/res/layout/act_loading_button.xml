@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <rafaelmfer.customviews.buttons.LoadingButton
+        android:id="@+id/loading_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="example 1 - click"
+        app:colorProgressBar="@color/orange_A400"
+        app:layout_constraintEnd_toStartOf="@id/loading_button2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:showLoading="false" />
+
+    <rafaelmfer.customviews.buttons.LoadingButton
+        android:id="@+id/loading_button2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@drawable/selector_gradient_blue_orange"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:text="example 2 - click"
+        android:textColor="@color/black"
+        app:colorProgressBar="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/loading_button"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:showLoading="true" />
+
+    <rafaelmfer.customviews.buttons.LoadingButton
+        android:id="@+id/loading_button3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@color/green_400"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:text="example 3 - click"
+        android:textColor="@color/amber_500"
+        app:colorProgressBar="@color/blue_800"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/loading_button"
+        tools:showLoading="true" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
