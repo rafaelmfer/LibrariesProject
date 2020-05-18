@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/amber_200">
+
+    <rafaelmfer.customviews.progressbar.DotsProgressBar
+        android:id="@+id/dots_progress1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:dotColors="@color/colorPrimary"
+        app:dotsCount="8"
+        app:layout_constraintBottom_toTopOf="@id/dots_progress2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:timeoutOfDots="1000" />
+
+    <rafaelmfer.customviews.progressbar.DotsProgressBar
+        android:id="@+id/dots_progress2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:dotColors="@color/colorPrimary"
+        app:dotsCount="15"
+        app:layout_constraintBottom_toTopOf="@id/dots_progress3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dots_progress1"
+        app:timeoutOfDots="500" />
+
+    <rafaelmfer.customviews.progressbar.DotsProgressBar
+        android:id="@+id/dots_progress3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:dotColors="@color/colorPrimary"
+        app:dotsCount="4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dots_progress2"
+        app:timeoutOfDots="3000" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

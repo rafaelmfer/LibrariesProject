@@ -2,6 +2,7 @@ package rafaelmfer.librariesproject
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
+import rafaelmfer.customviews.baseviews.ActBase
 import rafaelmfer.customviews.baseviews.FragBind
 import rafaelmfer.customviews.extensions.recyclerview.setupViewBinding
 import rafaelmfer.librariesproject.databinding.FragHostBinding
@@ -10,7 +11,8 @@ import kotlin.reflect.KClass
 class FragHost : FragBind<FragHostBinding>(FragHostBinding::class.java) {
 
     private val actList = listOf<KClass<out AppCompatActivity>>(
-        ActLoadingButton::class
+        ActLoadingButton::class,
+        ActDotsProgressBar::class
     )
 
     override fun FragHostBinding.onBoundView() {
@@ -20,7 +22,8 @@ class FragHost : FragBind<FragHostBinding>(FragHostBinding::class.java) {
             addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
             addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.HORIZONTAL))
         }
-
     }
 }
+
+class ActDotsProgressBar: ActBase(R.layout.act_dots_progress_bar)
 
