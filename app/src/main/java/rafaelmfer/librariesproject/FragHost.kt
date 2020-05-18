@@ -12,7 +12,8 @@ class FragHost : FragBind<FragHostBinding>(FragHostBinding::class.java) {
 
     private val actList = listOf<KClass<out AppCompatActivity>>(
         ActLoadingButton::class,
-        ActDotsProgressBar::class
+        ActDotsProgressBar::class,
+        ActMaterialIcons::class
     )
 
     override fun FragHostBinding.onBoundView() {
@@ -27,3 +28,4 @@ class FragHost : FragBind<FragHostBinding>(FragHostBinding::class.java) {
 
 class ActDotsProgressBar: ActBase(R.layout.act_dots_progress_bar)
 
+class ActMaterialIcons: ActBase(R.layout.act_material_icons)

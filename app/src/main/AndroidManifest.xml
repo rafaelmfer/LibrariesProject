@@ -19,6 +19,7 @@
         </activity>
         <activity android:name=".ActLoadingButton" />
         <activity android:name=".ActDotsProgressBar" />
+        <activity android:name=".ActMaterialIcons" />
     </application>
 
 </manifest>
