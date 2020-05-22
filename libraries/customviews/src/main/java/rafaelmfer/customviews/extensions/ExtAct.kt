@@ -33,7 +33,7 @@ fun ActivityContract.replaceFragment(
     fragment: Fragment,
     stackAdd: Boolean = true
 ) {
-    activity.run {
+    activityContract.run {
         supportFragmentManager.ensureTransaction().run {
             if (stackAdd) addToBackStack(fragment.javaClass.name)
             supportFragmentManager.setFragmentsVisibleHint(fragment, container)

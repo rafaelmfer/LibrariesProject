@@ -8,7 +8,10 @@ import rafaelmfer.customviews.extensions.replaceFragment
 import rafaelmfer.customviews.extensions.setStatusBarColor
 
 class ActHost(override val container: Int = R.id.act_frame_container) :
-    ActBind<ActFrameBinding>(ActFrameBinding::class.java), ActivityContract {
+    ActBind<ActFrameBinding>(), ActivityContract {
+
+    override val bindClass: Class<ActFrameBinding>
+        get() = ActFrameBinding::class.java
 
     override fun onResume() {
         super.onResume()

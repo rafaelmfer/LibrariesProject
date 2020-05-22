@@ -33,41 +33,42 @@ class LoadingButton @JvmOverloads constructor(
     init {
         LayoutInflater.from(context).inflate(R.layout.view_loading_button, this, true)
         attributesTypedArray =
-            context.theme.obtainStyledAttributes(attrs, R.styleable.LoadingButton, 0, 0)
-        buttonText = attributesTypedArray.getString(R.styleable.LoadingButton_android_text) ?: ""
-        buttonTextColor = attributesTypedArray.getColor(
-            R.styleable.LoadingButton_android_textColor,
-            ContextCompat.getColor(context, R.color.white)
-        )
+            context.theme.obtainStyledAttributes(attrs, R.styleable.LoadingButton, 0, 0).apply {
+                buttonText = getString(R.styleable.LoadingButton_android_text) ?: ""
+                buttonTextColor = getColor(
+                    R.styleable.LoadingButton_android_textColor,
+                    ContextCompat.getColor(context, R.color.white)
+                )
+                setupButton(context)
+                setupLoading(context)
+                setViewAsButtonForAccessibility()
+                recycle()
+            }
 
-        setupButton(context)
-        setupLoading(context)
-        setViewAsButtonForAccessibility()
-        attributesTypedArray.recycle()
     }
 
-    private fun setupButton(context: Context) {
+    private fun TypedArray.setupButton(context: Context) {
         button.apply {
             text = buttonText
             setTextColor(buttonTextColor)
             background =
-                attributesTypedArray.getDrawable(R.styleable.LoadingButton_android_background)
+                getDrawable(R.styleable.LoadingButton_android_background)
                     ?: ContextCompat.getDrawable(context, R.color.deep_purple_500)
             isEnabled =
-                attributesTypedArray.getBoolean(R.styleable.LoadingButton_enableButton, true)
+                getBoolean(R.styleable.LoadingButton_enableButton, true)
         }
     }
 
-    private fun setupLoading(context: Context) {
+    private fun TypedArray.setupLoading(context: Context) {
         loadingOnButton.apply {
             indeterminateDrawable.setColorFilter(
-                attributesTypedArray.getColor(
+                getColor(
                     R.styleable.LoadingButton_colorProgressBar,
                     ContextCompat.getColor(context, R.color.white)
                 ),
                 PorterDuff.Mode.SRC_IN
             )
-            visibility = if (attributesTypedArray.getBoolean(
+            visibility = if (getBoolean(
                     R.styleable.LoadingButton_showLoading,
                     false
                 )

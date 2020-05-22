@@ -7,13 +7,13 @@ const val PERMISSION_REQUEST_CODE = 11
 
 interface ActivityContract {
 
-    val activity get() = this as AppCompatActivity
+    val activityContract get() = this as AppCompatActivity
 
     val container: Int
 
     fun bundleRouter(fragID: Int, bundle: Bundle? = null) {}
 
-    fun onBackPress() = activity.onBackPressed()
+    fun onBackPress() = activityContract.onBackPressed()
 
-    fun popBackStack() = activity.supportFragmentManager.popBackStack()
+    fun popBackStack() = activityContract.supportFragmentManager.popBackStack()
 }

@@ -8,7 +8,10 @@ import rafaelmfer.customviews.extensions.recyclerview.setupViewBinding
 import rafaelmfer.librariesproject.databinding.FragHostBinding
 import kotlin.reflect.KClass
 
-class FragHost : FragBind<FragHostBinding>(FragHostBinding::class.java) {
+class FragHost : FragBind<FragHostBinding>() {
+
+    override val bindClass: Class<FragHostBinding>
+        get() = FragHostBinding::class.java
 
     private val actList = listOf<KClass<out AppCompatActivity>>(
         ActLoadingButton::class,
@@ -26,6 +29,6 @@ class FragHost : FragBind<FragHostBinding>(FragHostBinding::class.java) {
     }
 }
 
-class ActDotsProgressBar: ActBase(R.layout.act_dots_progress_bar)
+class ActDotsProgressBar : ActBase(R.layout.act_dots_progress_bar)
 
-class ActMaterialIcons: ActBase(R.layout.act_material_icons)
+class ActMaterialIcons : ActBase(R.layout.act_material_icons)

@@ -21,7 +21,14 @@ class DotsProgressBar : View {
     private var dotPosition = 0
     private var dotCount = DEF_COUNT
     private var timeout = DEF_TIMEOUT
-    private var dotColor = Color.parseColor("#" + Integer.toHexString(ContextCompat.getColor(context, R.color.orange_500)))
+    private var dotColor = Color.parseColor(
+        "#" + Integer.toHexString(
+            ContextCompat.getColor(
+                context,
+                R.color.orange_500
+            )
+        )
+    )
 
     constructor(context: Context?) : super(context) {
         initDotSize()
@@ -32,7 +39,11 @@ class DotsProgressBar : View {
         applyAttrs(context, attrs)
     }
 
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
+        context,
+        attrs,
+        defStyleAttr
+    ) {
         initDotSize()
         applyAttrs(context, attrs)
     }
@@ -45,15 +56,13 @@ class DotsProgressBar : View {
     }
 
     private fun applyAttrs(context: Context, attrs: AttributeSet?) {
-        val a = context.theme.obtainStyledAttributes(attrs, R.styleable.DotsProgressBar, 0, 0)
-        try {
-            dotColor = a.getColor(R.styleable.DotsProgressBar_dotColors, dotColor)
-            dotCount = a.getInteger(R.styleable.DotsProgressBar_dotsCount, dotCount)
+        context.theme.obtainStyledAttributes(attrs, R.styleable.DotsProgressBar, 0, 0).apply {
+            dotColor = getColor(R.styleable.DotsProgressBar_dotColors, dotColor)
+            dotCount = getInteger(R.styleable.DotsProgressBar_dotsCount, dotCount)
             dotCount = dotCount.coerceAtLeast(MIN_COUNT).coerceAtMost(MAX_COUNT)
-            timeout = a.getInteger(R.styleable.DotsProgressBar_timeoutOfDots, timeout)
+            timeout = getInteger(R.styleable.DotsProgressBar_timeoutOfDots, timeout)
             timeout = timeout.coerceAtLeast(MIN_TIMEOUT).coerceAtMost(MAX_TIMEOUT)
-        } finally {
-            a.recycle()
+            recycle()
         }
     }
 
@@ -74,7 +83,12 @@ class DotsProgressBar : View {
     private fun createDots(canvas: Canvas, paint: Paint) {
         for (i in 0 until dotCount) {
             val radius = if (i == dotPosition) activeDotRadius else dotRadius
-            canvas.drawCircle(dotsDistance / 2 + (i * dotsDistance).toFloat(), activeDotRadius.toFloat(), radius.toFloat(), paint)
+            canvas.drawCircle(
+                dotsDistance / 2 + (i * dotsDistance).toFloat(),
+                activeDotRadius.toFloat(),
+                radius.toFloat(),
+                paint
+            )
         }
     }
 
@@ -84,20 +98,20 @@ class DotsProgressBar : View {
     }
 
     private fun startAnimation() {
-        val bounceAnimation = BounceAnimation()
-        bounceAnimation.duration = timeout.toLong()
-        bounceAnimation.repeatCount = Animation.INFINITE
-        bounceAnimation.interpolator = LinearInterpolator()
-        bounceAnimation.setAnimationListener(object : Animation.AnimationListener {
-            override fun onAnimationStart(animation: Animation) {}
-            override fun onAnimationEnd(animation: Animation) {}
-            override fun onAnimationRepeat(animation: Animation) {
-                if (++dotPosition >= dotCount) {
-                    dotPosition = 0
+        startAnimation(BounceAnimation().apply {
+            duration = timeout.toLong()
+            repeatCount = Animation.INFINITE
+            interpolator = LinearInterpolator()
+            setAnimationListener(object : Animation.AnimationListener {
+                override fun onAnimationStart(animation: Animation) {}
+                override fun onAnimationEnd(animation: Animation) {}
+                override fun onAnimationRepeat(animation: Animation) {
+                    if (++dotPosition >= dotCount) {
+                        dotPosition = 0
+                    }
                 }
-            }
+            })
         })
-        startAnimation(bounceAnimation)
     }
 
     private inner class BounceAnimation : Animation() {

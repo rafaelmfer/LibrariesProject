@@ -6,13 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.viewbinding.ViewBinding
 
-abstract class FragBind<T : ViewBinding>(private val clazz: Class<T>) : FragBase() {
+abstract class FragBind<T : ViewBinding> : FragBase() {
 
+    abstract val bindClass: Class<T>
     lateinit var binding: T
 
     @Suppress("UNCHECKED_CAST")
     fun inflate() =
-        clazz.getMethod("inflate", LayoutInflater::class.java)
+        bindClass.getMethod("inflate", LayoutInflater::class.java)
             .invoke(null, layoutInflater) as T
 
     override fun onCreateView(

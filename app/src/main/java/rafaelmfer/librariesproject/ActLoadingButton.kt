@@ -5,7 +5,10 @@ import rafaelmfer.customviews.baseviews.ActBind
 import rafaelmfer.customviews.buttons.LoadingButton
 import rafaelmfer.librariesproject.databinding.ActLoadingButtonBinding
 
-class ActLoadingButton : ActBind<ActLoadingButtonBinding>(ActLoadingButtonBinding::class.java) {
+class ActLoadingButton : ActBind<ActLoadingButtonBinding>() {
+
+    override val bindClass: Class<ActLoadingButtonBinding>
+        get() = ActLoadingButtonBinding::class.java
 
     override fun ActLoadingButtonBinding.onBoundView() {
         loadingButton.set3secondsLoading()
@@ -16,7 +19,8 @@ class ActLoadingButton : ActBind<ActLoadingButtonBinding>(ActLoadingButtonBindin
     private fun LoadingButton.set3secondsLoading() {
         setOnClickListener {
             setLoadingState(true)
-            Handler().postDelayed({ setLoadingState(false) }, 3000) }
+            Handler().postDelayed({ setLoadingState(false) }, 3000)
+        }
     }
 
 }

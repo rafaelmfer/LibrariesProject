@@ -3,15 +3,12 @@ package rafaelmfer.customviews.baseviews
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModel
 import rafaelmfer.customviews.R
 
 open class ActBase(
     val layout: Any? = R.layout.act_frame,
     val exceptionHandler: Class<out Thread.UncaughtExceptionHandler>? = null
 ) : AppCompatActivity() {
-
-    open var viewModel: ViewModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,7 +20,6 @@ open class ActBase(
             is View -> setContentView(layout)
         }
         intent?.extras?.onExtras()
-        viewModel?.onViewModel()
         onView()
     }
 
@@ -34,15 +30,10 @@ open class ActBase(
 
     open fun Bundle.onExtras() {}
 
-    open fun ViewModel.onViewModel() {}
-
     open fun onView() {}
 
     companion object {
-        const val teste = "string"
-
         @JvmStatic
         lateinit var currentActivity: AppCompatActivity
     }
-
 }
