@@ -10,12 +10,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 
-inline fun <reified BuilderViewBinding : RecyclerViewBuilderViewBinding<*, *>>
+inline fun <reified BuilderViewBinding : ItemViewBuilderViewBinding<*, *>>
         RecyclerView.setupViewBinding(list: Collection<*>) =
     recyclerAdapterViewBinding<BuilderViewBinding>(list).apply { adapter = this }
 
-inline fun <reified BuilderViewBinding : RecyclerViewBuilderViewBinding<*, *>> recyclerAdapterViewBinding(collection: Collection<*>) =
+inline fun <reified BuilderViewBinding : ItemViewBuilderViewBinding<*, *>> recyclerAdapterViewBinding(collection: Collection<*>) =
     object : RecyclerAdapter<RecyclerViewHolderViewBinding>(collection) {
+
+        override var onTarget: () -> Unit = {}
+
+        override fun getTarget() = collection.size - 10
 
         override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int) =
             RecyclerViewHolderViewBinding(
@@ -24,14 +28,18 @@ inline fun <reified BuilderViewBinding : RecyclerViewBuilderViewBinding<*, *>> r
 
         override fun getItemCount() = collection.size
 
-        override fun onBindViewHolder(viewHolder: RecyclerViewHolderViewBinding, position: Int) =
-            viewHolder.builder.bind(position)
+        override fun onBindViewHolder(viewHolder: RecyclerViewHolderViewBinding, position: Int) {
+            if (position == getTarget()) {
+                onTarget()
+            }
+            viewHolder.builder.onBind(position)
+        }
     }
 
-open class RecyclerViewHolderViewBinding(val builder: RecyclerViewBuilderViewBinding<*, *>) :
+open class RecyclerViewHolderViewBinding(val builder: ItemViewBuilderViewBinding<*, *>) :
     RecyclerView.ViewHolder(builder.build())
 
-abstract class RecyclerViewBuilderViewBinding<Data, Binding : ViewBinding> {
+abstract class ItemViewBuilderViewBinding<Data, Binding : ViewBinding> {
 
     abstract val bindClass: Class<Binding>
 
@@ -42,7 +50,7 @@ abstract class RecyclerViewBuilderViewBinding<Data, Binding : ViewBinding> {
     private lateinit var viewGroup: ViewGroup
 
     @Suppress("UNCHECKED_CAST")
-    fun init(viewGroup: ViewGroup, collection: Collection<*>): RecyclerViewBuilderViewBinding<Data, Binding> {
+    fun init(viewGroup: ViewGroup, collection: Collection<*>): ItemViewBuilderViewBinding<Data, Binding> {
         this.viewGroup = viewGroup
         this.collection = collection as Collection<Data>
         context = viewGroup.context
@@ -62,7 +70,7 @@ abstract class RecyclerViewBuilderViewBinding<Data, Binding : ViewBinding> {
         ) as Binding
 
 
-    fun bind(position: Int) = binding.onBind(position)
+    fun onBind(position: Int) = binding.onBind(position)
 
     abstract fun Binding.onBind(position: Int)
 }

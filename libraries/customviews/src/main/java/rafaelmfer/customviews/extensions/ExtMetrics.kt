@@ -1,16 +1,20 @@
+@file:Suppress("UNCHECKED_CAST")
+
 package rafaelmfer.customviews.extensions
 
 import android.content.res.Resources
 import kotlin.math.roundToInt
 
-fun Int.dpToPx(): Int =
-    (this * Resources.getSystem().displayMetrics.density + 0.5f).roundToInt()
 
-fun Int.pxToDp(): Int =
-    (this / Resources.getSystem().displayMetrics.density + 0.5f).roundToInt()
+val <Type : Number> Type.dp
+    get() = (toFloat() * Resources.getSystem().displayMetrics.density) as Type
 
-fun Float.dpToPx(): Int =
-    (this * Resources.getSystem().displayMetrics.density + 0.5f).roundToInt()
+val <Type : Number> Type.dpToPx
+    get() = (toFloat() / Resources.getSystem().displayMetrics.density) as Type
 
-fun Float.pxToDp(): Int =
-    (this / Resources.getSystem().displayMetrics.density + 0.5f).roundToInt()
+fun Number.asDP(toDP: Boolean = true) = (if (toDP)
+    (this.toFloat() / Resources.getSystem().displayMetrics.density) else
+    (this.toFloat() * Resources.getSystem().displayMetrics.density)
+        ).roundToInt()
+
+fun Number.asPX() = asDP(false)

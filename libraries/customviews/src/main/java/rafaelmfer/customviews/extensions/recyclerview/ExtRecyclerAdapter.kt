@@ -8,40 +8,47 @@ import androidx.recyclerview.widget.RecyclerView
 val RecyclerView.recyclerAdapter get() = adapter as RecyclerAdapter?
 fun RecyclerView.update() = recyclerAdapter?.notifyDataSetChanged()
 
-abstract class RecyclerAdapter<Type : RecyclerView.ViewHolder>(collection: Collection<*>) : RecyclerView.Adapter<Type>() {
+abstract class RecyclerAdapter<Type : RecyclerView.ViewHolder>(var collection: Collection<*>) :
+    RecyclerView.Adapter<Type>() {
 
-    var collection: Collection<*> = collection
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
+    abstract var onTarget: () -> Unit
+
+    abstract fun getTarget(): Int
 }
 
-inline fun <reified Builder : RecyclerViewBuilder<*>> RecyclerView.setup(list: Collection<*>) =
+inline fun <reified Builder : ItemViewBuilder<*>> RecyclerView.setup(list: Collection<*>) =
     recyclerAdapter<Builder>(list).apply { adapter = this }
 
-inline fun <reified Builder : RecyclerViewBuilder<*>> recyclerAdapter(collection: Collection<*>) =
+inline fun <reified Builder : ItemViewBuilder<*>> recyclerAdapter(collection: Collection<*>) =
     object : RecyclerAdapter<RecyclerViewHolder>(collection) {
+
+        override var onTarget: () -> Unit = {}
+
+        override fun getTarget() = collection.size - 10
 
         override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int) =
             RecyclerViewHolder(Builder::class.java.newInstance().init(viewGroup, collection))
 
         override fun getItemCount() = collection.size
 
-        override fun onBindViewHolder(viewHolder: RecyclerViewHolder, position: Int) =
-            viewHolder.builder.bind(position)
+        override fun onBindViewHolder(viewHolder: RecyclerViewHolder, position: Int) {
+            if (position == getTarget()) {
+                onTarget()
+            }
+            viewHolder.builder.onBind(position)
+        }
     }
 
-open class RecyclerViewHolder(val builder: RecyclerViewBuilder<*>) : RecyclerView.ViewHolder(builder.build())
+open class RecyclerViewHolder(val builder: ItemViewBuilder<*>) : RecyclerView.ViewHolder(builder.build())
 
-abstract class RecyclerViewBuilder<Type> {
+abstract class ItemViewBuilder<Type> {
     abstract val layout: Int
     lateinit var viewGroup: ViewGroup
     lateinit var view: View
     lateinit var collection: Collection<Type>
 
     @Suppress("UNCHECKED_CAST")
-    fun init(viewGroup: ViewGroup, collection: Collection<*>): RecyclerViewBuilder<Type> {
+    fun init(viewGroup: ViewGroup, collection: Collection<*>): ItemViewBuilder<Type> {
         this.viewGroup = viewGroup
         this.collection = collection as Collection<Type>
         return this
@@ -52,7 +59,7 @@ abstract class RecyclerViewBuilder<Type> {
         return view
     }
 
-    fun bind(position: Int) = view.onBind(position)
+    fun onBind(position: Int) = view.onBind(position)
 
     abstract fun View.onBind(position: Int)
 }

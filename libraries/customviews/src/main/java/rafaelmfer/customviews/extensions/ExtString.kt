@@ -1,5 +1,6 @@
 package rafaelmfer.customviews.extensions
 
+import android.annotation.SuppressLint
 import java.util.*
 
 const val LINE_BREAK = "\n"
@@ -13,6 +14,7 @@ val <T> T.string get() = toString()
 
 fun String.replaceAll(regex: String, newValue: String) = this.replace(regex.toRegex(), newValue)
 
+@SuppressLint("DefaultLocale")
 fun String.capitalizeEveryWord(): String {
     val text = this.toLowerCase(Locale.ROOT).split(" ")
     var formattedText = ""
@@ -43,4 +45,11 @@ fun String.formatWithMask(mask: String): String {
     for (i in 0 until this.length) aMask =
         aMask.replaceFirst("#".toRegex(), this.substring(i, i + 1))
     return aMask.replace("#".toRegex(), "")
+}
+
+fun String.isDigit(): Boolean {
+    for (char in this) {
+        if (!char.isDigit()) return false
+    }
+    return true
 }

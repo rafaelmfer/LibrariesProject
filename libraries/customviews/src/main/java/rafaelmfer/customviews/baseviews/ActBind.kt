@@ -5,17 +5,17 @@ import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
 
-abstract class ActBind<T : ViewBinding> : ActBase() {
+abstract class ActBind<Binding : ViewBinding> : ActBase() {
 
-    abstract val bindClass: Class<T>
-    lateinit var binding: T
+    abstract val bindClass: Class<Binding>
+    lateinit var binding: Binding
 
     val activity by lazy { binding.root.context as AppCompatActivity }
 
     @Suppress("UNCHECKED_CAST")
     fun inflate() =
         bindClass.getMethod("inflate", LayoutInflater::class.java)
-            .invoke(null, layoutInflater) as T
+            .invoke(null, layoutInflater) as Binding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,7 +24,7 @@ abstract class ActBind<T : ViewBinding> : ActBase() {
         binding.onBoundView()
     }
 
-    abstract fun T.onBoundView()
+    abstract fun Binding.onBoundView()
 }
 
 

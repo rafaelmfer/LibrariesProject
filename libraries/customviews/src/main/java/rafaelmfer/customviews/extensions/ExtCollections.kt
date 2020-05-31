@@ -9,3 +9,9 @@ fun <T> MutableList<T>.update(collection: MutableList<T>) {
     clear()
     collection.forEach { add(it) }
 }
+
+fun <T : Comparable<T>> listOfRange(iterable: Iterable<T>): MutableList<T> {
+    val list = mutableListOf<T>()
+    iterable.forEach { list.add(it) }
+    return list
+}

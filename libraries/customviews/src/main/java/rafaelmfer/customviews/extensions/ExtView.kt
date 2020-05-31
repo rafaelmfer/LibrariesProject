@@ -201,6 +201,7 @@ fun View.buildFile(name: String) = if (!hasWritePermission(context)) null else {
     )
 }
 
+@Suppress("DEPRECATION")
 fun buildDirAndFile(name: String) = File(getExternalStorageDirectory(), appName).run {
     if (!exists()) mkdirs()
     val file = File(this, name)
@@ -411,6 +412,7 @@ fun View.setOnClickAndCallBack(onClick: (() -> Unit) -> Unit, callBack: (() -> U
 
 fun View.getColor(color: Int) = ContextCompat.getColor(context, color)
 
+@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 inline fun View.obtainStyledAttributes(
     set: AttributeSet?,
     attrs: IntArray? = null,
@@ -457,6 +459,8 @@ fun View.find(id: Int) = findViewById<View>(id)
 val View.isScreenVertical get() = context.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
 
 val View.activity get() = context.scanForAct!!
+
+fun Context.toast(message: Any?) = Toast.makeText(this, stringAny(message), LENGTH_LONG).show()
 
 fun View.toast(message: Any?) = Toast.makeText(context, stringAny(message), LENGTH_LONG).show()
 

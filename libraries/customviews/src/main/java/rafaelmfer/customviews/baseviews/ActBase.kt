@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import rafaelmfer.customviews.R
 
 open class ActBase(
-    val layout: Any? = R.layout.act_frame,
+    open val layout: Any? = R.layout.act_frame,
     val exceptionHandler: Class<out Thread.UncaughtExceptionHandler>? = null
 ) : AppCompatActivity() {
 
@@ -16,8 +16,8 @@ open class ActBase(
             Thread.setDefaultUncaughtExceptionHandler(it.newInstance())
         }
         when (layout) {
-            is Int -> setContentView(layout)
-            is View -> setContentView(layout)
+            is Int -> setContentView(layout as Int)
+            is View -> setContentView(layout  as View)
         }
         intent?.extras?.onExtras()
         onView()

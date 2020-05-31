@@ -21,5 +21,10 @@ fun <T : Fragment> T.newInstance(bundleBuilder: Bundle.() -> Unit) = apply {
 fun Fragment.requireAct(block: Fragment.() -> Unit) =
     requireActivity().run { block.invoke(this@requireAct) }
 
-inline fun <reified T : ViewModel> FragmentActivity.newViewModel(): T =
-    ViewModelProviders.of(this).get(T::class.java)
+@Suppress("DEPRECATION")
+inline fun <reified Model : ViewModel> FragmentActivity.viewModel(): Model =
+    ViewModelProviders.of(this).get(Model::class.java)
+
+@Suppress("DEPRECATION")
+inline fun <reified Model : ViewModel> Fragment.viewModel(): Model =
+    ViewModelProviders.of(this).get(Model::class.java)
