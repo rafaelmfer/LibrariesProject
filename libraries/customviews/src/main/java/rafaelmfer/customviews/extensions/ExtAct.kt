@@ -41,9 +41,3 @@ fun ActivityContract.replaceFragment(
         }
     }
 }
-
-//fun AppCompatActivity.bottomNavControl(host: Int, bottomNav: Int, destinationList: Set<Int>) =
-//    findNavController(host).let {
-//        setupActionBarWithNavController(it, AppBarConfiguration(destinationList))
-//        findViewById<BottomNavigationView>(bottomNav).setupWithNavController(it)
-//    }

@@ -17,6 +17,7 @@ class DotsProgressBar : View {
     private var dotRadius = 5
     private var activeDotRadius = 8
     private var dotsDistance = 20
+    private val paint = Paint()
 
     private var dotPosition = 0
     private var dotCount = DEF_COUNT
@@ -69,7 +70,6 @@ class DotsProgressBar : View {
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         if (isShown) {
-            val paint = Paint()
             paint.color = dotColor
             createDots(canvas, paint)
         }
