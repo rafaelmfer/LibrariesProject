@@ -68,7 +68,7 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
     fun updateTitleToolbar() {
         tvToolbarTitle.run {
             text = titleToolbar
-            contentDescription = resources.getString(R.string.acs_toolbar_tittle, titleToolbar)
+            contentDescription = resources.getString(R.string.acs_toolbar_title, titleToolbar)
         }
     }
 
