@@ -11,4 +11,6 @@
     <string name="ricota_desc">Derivado de queijo de massa mole, fresco e com baixo teor de gordura. É um queijo uma vez que é preparado por meio da coagulação ácida das proteínas presentes no soro.</string>
     <string name="adoro">Adoro!</string>
     <string name="nao_gosto">Não gosto</string>
+
+    <string name="panel">Panel</string>
 </resources>
