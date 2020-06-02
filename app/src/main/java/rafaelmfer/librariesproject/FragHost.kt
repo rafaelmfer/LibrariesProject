@@ -10,13 +10,13 @@ import kotlin.reflect.KClass
 
 class FragHost : FragBind<FragHostBinding>() {
 
-    override val bindClass: Class<FragHostBinding>
-        get() = FragHostBinding::class.java
+    override val bindClass by lazy { FragHostBinding::class.java }
 
     private val actList = listOf<KClass<out AppCompatActivity>>(
         ActLoadingButton::class,
         ActDotsProgressBar::class,
-        ActMaterialIcons::class
+        ActMaterialIcons::class,
+        ActAppDialog::class
     )
 
     override fun FragHostBinding.onBoundView() {
