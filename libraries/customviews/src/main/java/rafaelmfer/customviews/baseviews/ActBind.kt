@@ -1,16 +1,15 @@
 package rafaelmfer.customviews.baseviews
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
-import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
+import kotlin.reflect.KClass
 
 abstract class ActBind<Binding : ViewBinding> : ActBase() {
 
     abstract val bindClass: Class<Binding>
     lateinit var binding: Binding
-
-    val activity by lazy { binding.root.context as AppCompatActivity }
 
     @Suppress("UNCHECKED_CAST")
     fun inflate() =
@@ -25,6 +24,12 @@ abstract class ActBind<Binding : ViewBinding> : ActBase() {
     }
 
     abstract fun Binding.onBoundView()
+
+    inline fun <reified B : ViewBinding> viewBind() = lazy { bindView(B::class) }
 }
 
+val Context.inflater get() = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
+@Suppress("UNCHECKED_CAST")
+fun <B : ViewBinding> Context.bindView(klass: KClass<B>) =
+    klass.java.getMethod("inflate", LayoutInflater::class.java).invoke(null, inflater) as B
