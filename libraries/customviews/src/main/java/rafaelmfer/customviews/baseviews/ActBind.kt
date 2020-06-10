@@ -23,7 +23,7 @@ abstract class ActBind<Binding : ViewBinding> : ActBase() {
         binding.onBoundView()
     }
 
-    abstract fun Binding.onBoundView()
+    open fun Binding.onBoundView() {}
 
     inline fun <reified B : ViewBinding> viewBind() = lazy { bindView(B::class) }
 }
@@ -31,5 +31,5 @@ abstract class ActBind<Binding : ViewBinding> : ActBase() {
 val Context.inflater get() = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
 @Suppress("UNCHECKED_CAST")
-fun <B : ViewBinding> Context.bindView(klass: KClass<B>) =
-    klass.java.getMethod("inflate", LayoutInflater::class.java).invoke(null, inflater) as B
+fun <B : ViewBinding> Context.bindView(kClass: KClass<B>) =
+    kClass.java.getMethod("inflate", LayoutInflater::class.java).invoke(null, inflater) as B

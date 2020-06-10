@@ -9,6 +9,7 @@ import android.view.accessibility.AccessibilityEvent
 import android.widget.Button
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import rafaelmfer.customviews.R
 import rafaelmfer.customviews.extensions.changeVisibility
 import rafaelmfer.customviews.extensions.configureBackButtonAction
@@ -28,23 +29,27 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 
     private var attributesTypedArray: TypedArray
 
-    private var listenerCloseButton: () -> Unit = {}
-
     var titleToolbar: String? = null
 
     init {
         LayoutInflater.from(context).inflate(R.layout.view_toolbar_basic, this, true)
-        attributesTypedArray = context.theme.obtainStyledAttributes(attrs, R.styleable.BasicToolbar, 0, 0)
-        tvToolbarTitle.apply {
-            text = attributesTypedArray.getString(R.styleable.BasicToolbar_toolbarTitle) ?: ""
-            setHeaderAccessibility()
-        }
-        showBackButton = attributesTypedArray.getBoolean(R.styleable.BasicToolbar_showBackButton, true)
-        showTitle = attributesTypedArray.getBoolean(R.styleable.BasicToolbar_showTitle, true)
-        showCloseButton = attributesTypedArray.getBoolean(R.styleable.BasicToolbar_showCloseButton, false)
+        attributesTypedArray = context.theme.obtainStyledAttributes(attrs, R.styleable.BasicToolbar, 0, 0).apply {
+            tvToolbarTitle.apply {
+                text = getString(R.styleable.BasicToolbar_toolbarText) ?: ""
+                setTextColor(getColor(R.styleable.BasicToolbar_toolbarTextColor, ContextCompat.getColor(context, R.color.black)))
+                setHeaderAccessibility()
+            }
+            btBackButton.setTextColor(getColor(R.styleable.BasicToolbar_buttonLeftTextColor, ContextCompat.getColor(context, R.color.black)))
+            btCloseButton.setTextColor(getColor(R.styleable.BasicToolbar_buttonRightTextColor, ContextCompat.getColor(context, R.color.black)))
 
-        initView()
-        attributesTypedArray.recycle()
+            showBackButton = getBoolean(R.styleable.BasicToolbar_showBackButton, true)
+            showTitle = getBoolean(R.styleable.BasicToolbar_showTitle, true)
+            showCloseButton = getBoolean(R.styleable.BasicToolbar_showCloseButton, false)
+
+            initView()
+
+            recycle()
+        }
     }
 
     override fun onAttachedToWindow() {
@@ -61,8 +66,12 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
         btCloseButton.changeVisibility(showCloseButton)
     }
 
+    fun setLeftButtonAction(action: () -> Unit) {
+        btBackButton.setOnClickListener { action() }
+    }
+
     fun setCloseButtonAction(action: () -> Unit) {
-        this.listenerCloseButton = action
+        btCloseButton.setOnClickListener { action() }
     }
 
     fun updateTitleToolbar() {

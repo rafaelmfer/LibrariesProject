@@ -23,7 +23,10 @@
 
     <!--    TOOLBARS ////////////////////////////////////////////////////////////////////////////-->
     <declare-styleable name="BasicToolbar">
-        <attr name="toolbarTitle" format="string" />
+        <attr name="toolbarText" format="string" />
+        <attr name="toolbarTextColor" format="color" />
+        <attr name="buttonLeftTextColor" format="color" />
+        <attr name="buttonRightTextColor" format="color" />
         <attr name="showTitle" format="boolean" />
         <attr name="showCloseButton" format="boolean" />
         <attr name="showBackButton" format="boolean" />

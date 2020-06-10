@@ -12,11 +12,12 @@
         android:layout_height="@dimen/height_48"
         android:layout_marginStart="@dimen/margin_4"
         android:layout_marginTop="@dimen/margin_8"
+        android:layout_marginBottom="@dimen/margin_4"
         android:contentDescription="@string/acs_back"
         android:text="@string/material_arrow_back"
         android:textAllCaps="false"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="@id/toolbar_title"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -47,10 +48,11 @@
         android:layout_height="@dimen/height_48"
         android:layout_marginTop="@dimen/margin_8"
         android:layout_marginEnd="@dimen/margin_4"
+        android:layout_marginBottom="@dimen/margin_4"
         android:contentDescription="@string/acs_close"
         android:text="@string/material_close"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="@id/toolbar_title"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

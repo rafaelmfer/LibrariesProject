@@ -9,17 +9,26 @@ import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.util.AttributeSet
 import android.view.MotionEvent
+import android.widget.ImageView
 import androidx.annotation.ColorInt
 import androidx.annotation.Dimension
 import androidx.annotation.DrawableRes
-import androidx.appcompat.widget.AppCompatImageView
 import kotlin.math.min
 import kotlin.math.pow
 import kotlin.math.sqrt
 
 private const val DEF_PRESS_HIGHLIGHT_COLOR = 0x32000000
 
-open class CircleImageView(context: Context, attrs: AttributeSet?) : AppCompatImageView(context, attrs) {
+@SuppressLint("AppCompatCustomView")
+open class CircleImageView @JvmOverloads
+constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0,
+    defStyleRes: Int = 0
+) :
+    ImageView(context, attrs, defStyleAttr, defStyleRes) {
+
     private var mBitmapShader: Shader? = null
     private val mShaderMatrix: Matrix
     private val mBitmapDrawBounds: RectF
@@ -31,8 +40,6 @@ open class CircleImageView(context: Context, attrs: AttributeSet?) : AppCompatIm
     private val mInitialized: Boolean
     private var mPressed = false
     private var mHighlightEnable: Boolean
-
-    constructor(context: Context) : this(context, null) {}
 
     override fun setImageResource(@DrawableRes resId: Int) {
         super.setImageResource(resId)
@@ -63,7 +70,6 @@ open class CircleImageView(context: Context, attrs: AttributeSet?) : AppCompatIm
         updateBitmapSize()
     }
 
-    @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent): Boolean {
         var processed = false
         when (event.action) {
@@ -224,11 +230,16 @@ open class CircleImageView(context: Context, attrs: AttributeSet?) : AppCompatIm
         var highlightEnable = true
         var highlightColor = DEF_PRESS_HIGHLIGHT_COLOR
         if (attrs != null) {
-            val a: TypedArray = context.obtainStyledAttributes(attrs, R.styleable.CircleImageView, 0, 0)
+            val a: TypedArray =
+                context.obtainStyledAttributes(attrs, R.styleable.CircleImageView, 0, 0)
             strokeColor = a.getColor(R.styleable.CircleImageView_strokeColor, Color.TRANSPARENT)
-            strokeWidth = a.getDimensionPixelSize(R.styleable.CircleImageView_strokeWidth, 0).toFloat()
+            strokeWidth =
+                a.getDimensionPixelSize(R.styleable.CircleImageView_strokeWidth, 0).toFloat()
             highlightEnable = a.getBoolean(R.styleable.CircleImageView_highlightEnable, true)
-            highlightColor = a.getColor(R.styleable.CircleImageView_highlightColor, DEF_PRESS_HIGHLIGHT_COLOR)
+            highlightColor = a.getColor(
+                R.styleable.CircleImageView_highlightColor,
+                DEF_PRESS_HIGHLIGHT_COLOR
+            )
             a.recycle()
         }
         mShaderMatrix = Matrix()

@@ -42,16 +42,16 @@ inline fun <reified Builder : ItemViewBuilder<*>> recyclerAdapter(collection: Co
 open class RecyclerViewHolder(val builder: ItemViewBuilder<*>) : RecyclerView.ViewHolder(builder.build())
 
 abstract class ItemViewBuilder<Type> {
+
     abstract val layout: Int
     lateinit var viewGroup: ViewGroup
     lateinit var view: View
     lateinit var collection: Collection<Type>
 
     @Suppress("UNCHECKED_CAST")
-    fun init(viewGroup: ViewGroup, collection: Collection<*>): ItemViewBuilder<Type> {
+    fun init(viewGroup: ViewGroup, collection: Collection<*>): ItemViewBuilder<Type> = apply {
         this.viewGroup = viewGroup
         this.collection = collection as Collection<Type>
-        return this
     }
 
     fun build(): View {
