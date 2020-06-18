@@ -398,6 +398,31 @@ fun View.changeToInvisible(invisible: Boolean) {
     this.visibility = if (invisible) View.INVISIBLE else View.VISIBLE
 }
 
+val View.visible: View
+    get() {
+        visibility = View.VISIBLE
+        return this
+    }
+
+val View.invisible: View
+    get() {
+        visibility = View.INVISIBLE
+        return this
+    }
+
+val View.gone: View
+    get() {
+        visibility = View.GONE
+        return this
+    }
+
+fun View.toggleVisibility() {
+    visibility = when (visibility) {
+        View.INVISIBLE, View.GONE -> View.VISIBLE
+        else -> View.INVISIBLE
+    }
+}
+
 fun <T : View> T.onGlobalLayoutListener(onGlobalLayout: T.() -> Unit) = viewTreeObserver.let {
     it.addOnGlobalLayoutListener(object : OnGlobalLayoutListener {
         override fun onGlobalLayout() {

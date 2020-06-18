@@ -47,11 +47,13 @@ abstract class ItemViewBuilder<Type> {
     lateinit var viewGroup: ViewGroup
     lateinit var view: View
     lateinit var collection: Collection<Type>
+    lateinit var recycler: RecyclerView
 
     @Suppress("UNCHECKED_CAST")
     fun init(viewGroup: ViewGroup, collection: Collection<*>): ItemViewBuilder<Type> = apply {
         this.viewGroup = viewGroup
         this.collection = collection as Collection<Type>
+        recycler = viewGroup as RecyclerView
     }
 
     fun build(): View {
