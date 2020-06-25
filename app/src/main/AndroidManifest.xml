@@ -22,6 +22,7 @@
         <activity android:name=".ActMaterialIcons" />
         <activity android:name=".ActAppDialog" />
         <activity android:name=".ActPanel" />
+        <activity android:name=".ActRecyclerRadioButton" />
     </application>
 
 </manifest>

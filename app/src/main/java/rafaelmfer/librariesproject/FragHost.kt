@@ -16,7 +16,8 @@ class FragHost : FragBind<FragHostBinding>() {
         ActLoadingButton::class,
         ActDotsProgressBar::class,
         ActMaterialIcons::class,
-        ActAppDialog::class
+        ActAppDialog::class,
+        ActRecyclerRadioButton::class
     )
 
     override fun FragHostBinding.onBoundView() {
