@@ -1,5 +1,6 @@
 package rafaelmfer.customviews.extensions.recyclerview
 
+import android.content.Context
 import android.view.LayoutInflater.from
 import android.view.View
 import android.view.ViewGroup
@@ -48,12 +49,14 @@ abstract class ItemViewBuilder<Type> {
     lateinit var view: View
     lateinit var collection: Collection<Type>
     lateinit var recycler: RecyclerView
+    lateinit var context: Context
 
     @Suppress("UNCHECKED_CAST")
-    fun init(viewGroup: ViewGroup, collection: Collection<*>): ItemViewBuilder<Type> = apply {
-        this.viewGroup = viewGroup
-        this.collection = collection as Collection<Type>
-        recycler = viewGroup as RecyclerView
+    fun init(group: ViewGroup, coll: Collection<*>): ItemViewBuilder<Type> = apply {
+        viewGroup = group
+        collection = coll as Collection<Type>
+        recycler = group as RecyclerView
+        context = group.context
     }
 
     fun build(): View {
