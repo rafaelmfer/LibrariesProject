@@ -49,6 +49,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.AccessibilityDelegateCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat
+import androidx.core.view.updateMargins
 import androidx.recyclerview.widget.RecyclerView
 import rafaelmfer.customviews.R
 import java.io.File
@@ -498,6 +499,17 @@ fun View.getDeviceStatusBarHeight(): Int {
     val resourceId = resources.getIdentifier(STATUS_BAR_HEIGHT, DIMENSION, SYSTEM_NAME)
     if (resourceId > 0) result = resources.getDimensionPixelOffset(resourceId)
     return result
+}
+
+fun View.addStatusBarHeight() {
+    val params = this.layoutParams as ViewGroup.LayoutParams
+    params.height = params.height + getDeviceStatusBarHeight()
+}
+
+fun View.addMarginTopStatusBarHeight() {
+    val params = this.layoutParams as ViewGroup.MarginLayoutParams
+    params.updateMargins(top = params.topMargin + getDeviceStatusBarHeight())
+    this.layoutParams = params
 }
 
 fun View.setToolbarAccessibleBackButton() {
