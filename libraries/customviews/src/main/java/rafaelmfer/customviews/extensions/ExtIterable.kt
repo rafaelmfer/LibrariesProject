@@ -1,6 +1,6 @@
 package rafaelmfer.customviews.extensions
 
-fun <T> Iterable<T>.get(index: Int): T {
+operator fun <T> Iterable<T>.get(index: Int): T {
     forEachIndexed { indexed, element -> if (indexed == index) return element }
     throw IndexOutOfBoundsException()
 }
